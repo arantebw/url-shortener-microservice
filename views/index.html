@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Project URL Shortener Microservice</title>
+
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+    
+  </head>
+  <body>
+
+    <h1>Project URL Shortener Microservice</h1>
+
+    <form method="POST" action="/api/shorturl/new">
+      <input type="text" name="url" id="url" placeholder="https://www.example.com/very/long/url/">
+      <input type="submit" value="Shorten This">
+    </form>
+
+    <h2>Usage</h2>
+    <p>Method: "POST"</p>
+    <p>Endpoint: <a href="#">https://abw-url-shortener-microservice/api/shorturl/new</a></p>
+    <p>Key: "url"</p>
+    <p>Value: URL to be shortened</p>
+    
+    <h2>Output</h2>
+    
+    <footer>
+      <p>Made with ? and ? from the <a href="#">Philippines</a> by <a href="#">Billy Arante</a></p>
+      <ul>
+	<li><a href="#">freeCodeCamp</a></li>
+	<li><a href="#">GitHub</a></li>
+	<li><a href="#">LinkedIn</a></li>
+      </ul>
+    </footer>
+    
+    <script src="/scripts/main.js"></script>
+    
+  </body>
+</html>
