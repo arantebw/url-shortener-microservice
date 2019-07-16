@@ -1,6 +1,7 @@
 // app.js
 
 'use strict';
+const db = require('./db');
 const cors = require('cors');
 const sass = require('node-sass-middleware');
 const express = require('express');
@@ -8,9 +9,6 @@ const express = require('express');
 const app = express();
 
 // Middlewares
-
-// CORS
-app.use(cors({ optionSuccessStatus: 200 }));
 
 // Sass
 app.use(sass({
@@ -25,6 +23,9 @@ app.use('/fontawesome', express.static(__dirname + '/node_modules/@fortawesome/f
 
 // Load assets
 app.use(express.static(__dirname + '/public'));
+
+// CORS
+app.use(cors({ optionSuccessStatus: 200 }));
 
 // Routes
 app.get('/', (req, res) => {
