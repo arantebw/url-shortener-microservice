@@ -1,8 +1,10 @@
-// app.js
+// /app.js
 
 'use strict';
+const shortURL = require('./models/URL');
+const mongoose = require('mongoose');
+require('dotenv').config();
 const bodyParser = require('body-parser');
-const db = require('./db');
 const cors = require('cors');
 const sass = require('node-sass-middleware');
 const express = require('express');
@@ -10,6 +12,16 @@ const express = require('express');
 const app = express();
 
 // Middlewares
+
+// Database
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true }).then(
+    () => {
+	console.log('Database connection established');
+    },
+    err => {
+	throw new Error(err);
+    }
+);
 
 // Body Parser
 const urlEncodedParser = bodyParser.urlencoded({ extended: false });
@@ -33,17 +45,22 @@ app.use(cors({ optionSuccessStatus: 200 }));
 
 // Routes
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/views/index.html');
+     res.sendFile(__dirname + '/views/index.html');
 });
 
-let originalUrl;
+let originalUrl, newUrl, newShortUrl;
 app.post('/api/shorturl/new', urlEncodedParser, (req, res, next) => {
-    originalUrl = req.body.url;
+    newShortUrl = 1;
+    newUrl = new shortURL({
+	"originalUrl": req.body.url,
+	"shortUrl": newShortUrl
+    });
+    newUrl.save();
     next();
 }, (req, res) => {
     res.json({
-	"original_url": originalUrl,
-	"short_url": "short url"
+	"original_url": newUrl.originalUrl,
+	"short_url": newUrl.shortUrl
     });
 });
 
