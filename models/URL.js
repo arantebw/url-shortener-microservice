@@ -6,8 +6,8 @@ const Schema = mongoose.Schema;
 const ObjectID = Schema.ObjectId;
 
 const URLSchema = Schema({
-    originalUrl: { type: String },
-    shortUrl: { type: String }
+    originalUrl: String,
+    shortUrl: Number
 });
 
 module.exports = mongoose.model('URL', URLSchema);

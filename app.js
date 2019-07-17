@@ -1,13 +1,15 @@
 // /app.js
 
 'use strict';
-const shortURL = require('./models/URL');
-const mongoose = require('mongoose');
 require('dotenv').config();
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const sass = require('node-sass-middleware');
 const express = require('express');
+
+// Models
+const shortURL = require('./models/URL');
 
 const app = express();
 
@@ -50,13 +52,17 @@ app.get('/', (req, res) => {
 
 let originalUrl, newUrl, newShortUrl;
 app.post('/api/shorturl/new', urlEncodedParser, (req, res, next) => {
-    newShortUrl = 1;
-    newUrl = new shortURL({
-	"originalUrl": req.body.url,
-	"shortUrl": newShortUrl
+    shortURL.estimatedDocumentCount({}).exec((err, count) => {
+	if (err) {
+	    throw new Error(err);
+	}
+	newUrl = new shortURL({
+	    "originalUrl": req.body.url,
+	    "shortUrl": count + 1
+	});
+	newUrl.save();
+	next();
     });
-    newUrl.save();
-    next();
 }, (req, res) => {
     res.json({
 	"original_url": newUrl.originalUrl,
