@@ -102,5 +102,51 @@ footer {
     main {
 	width: 69%;
 	margin: 0 auto;
+	form {
+	    input[type="text"] {
+		width: 85%;
+	    }
+	}
+	img {
+	    width: 70%;
+	}
+    }
+}
+
+@media (min-width: 1024px) {
+    main {
+	form {
+	    input[type="text"] {
+		width: 89%;
+	    }
+	}
+    }
+}
+
+@media (min-width: 1280px) {
+    main {
+	form {
+	    input[type="text"] {
+		width: 91%;
+	    }
+	}
+    }
+}
+
+@media (min-width: 1440px) {
+    main {
+	form {
+	    input[type="text"] {
+		width: 92%;
+	    }
+	}
+    }
+}
+
+@media (min-height: 800px) {
+    footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
     }
 }
