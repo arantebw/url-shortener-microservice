@@ -52,25 +52,30 @@ app.get('/', (req, res) => {
      res.sendFile(__dirname + '/views/index.html');
 });
 
-let originalUrl, newUrl, newShortUrl;
+let originalUrl, newUrl, newShortUrl, myURL;
 app.post('/api/shorturl/new', urlEncodedParser, (req, res, next) => {
-    let myURL = new URL(req.body.url);
-    dns.lookup(myURL.hostname, (err, address, family) => {
-	if (err || !address) {
-	    res.json({ "error": "Invalid URL" });
-	}
-    });
-    shortURL.estimatedDocumentCount({}).exec((err, count) => {
-	if (err) {
-	    throw new Error(err);
-	}
-	newUrl = new shortURL({
-	    "originalUrl": req.body.url,
-	    "shortUrl": count + 1
+    try {
+	myURL = new URL(req.body.url);
+	dns.lookup(myURL.hostname, (err, address, family) => {
+	    if (err) {
+		res.send({ "error": "Invalid URL" });
+	    }
+	    console.log('URL is valid');
 	});
-	newUrl.save();
-	next();
-    });
+	shortURL.estimatedDocumentCount({}).exec((err, count) => {
+	    if (err) {
+		throw new Error(err);
+	    }
+	    newUrl = new shortURL({
+		"originalUrl": req.body.url,
+		"shortUrl": count + 1
+	    });
+	    newUrl.save();
+	    next();
+	});
+    } catch (err) {
+	res.send({ "error": "Invalid URL" });
+    }
 }, (req, res) => {
     res.json({
 	"original_url": newUrl.originalUrl,
