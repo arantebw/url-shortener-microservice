@@ -70,4 +70,13 @@ app.post('/api/shorturl/new', urlEncodedParser, (req, res, next) => {
     });
 });
 
+app.get('/api/shorturl/:id', (req, res, next) => {
+    shortURL.findOne({ shortUrl: parseInt(req.params.id) }).exec((err, document) => {
+	originalUrl = document.originalUrl;
+	next();
+    });
+}, (req, res) => {
+    res.redirect(originalUrl);
+});
+
 module.exports = app;
