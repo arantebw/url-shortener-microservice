@@ -2,6 +2,8 @@
 
 'use strict';
 require('dotenv').config();
+const url = require('url');
+const dns = require('dns');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -52,6 +54,12 @@ app.get('/', (req, res) => {
 
 let originalUrl, newUrl, newShortUrl;
 app.post('/api/shorturl/new', urlEncodedParser, (req, res, next) => {
+    let myURL = new URL(req.body.url);
+    dns.lookup(myURL.hostname, (err, address, family) => {
+	if (err || !address) {
+	    res.json({ "error": "Invalid URL" });
+	}
+    });
     shortURL.estimatedDocumentCount({}).exec((err, count) => {
 	if (err) {
 	    throw new Error(err);
