@@ -8,4 +8,50 @@
 
 body {
     font-family: 'Quicksand', san-serif;
+    color: #333;
+}
+
+main {
+    padding: 15px;
+    h1,
+    h2,
+    h3{
+	font-size: 1.3em;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #ccc;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+    }
+    h2 + div {
+	margin-bottom: 15px;
+    }
+    form {
+	margin-bottom: 15px;
+    }
+    img {
+	width: 100%;
+	margin-bottom: 15px;
+    }
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    font-size: 12px;
+    line-height: 2;
+    text-align: center;
+    padding: 15px 0;
+    ul {
+	list-style: none;
+	li {
+	    display: inline-block;
+	}
+	li:nth-child(even) {
+	    margin: 0 15px;
+	}
+    }
+    a {
+	color: #fff;
+    }
 }
