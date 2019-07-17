@@ -43,7 +43,7 @@ main {
 	    text-transform: lowercase;
 	}
 	input[type="text"] {
-	    width: 74%;
+	    width: 75%;
 	}
     }
     img {
@@ -75,5 +75,32 @@ footer {
     }
     a {
 	color: #fff;
+    }
+}
+
+@media (min-width: 375px) {
+    main {
+	form {
+	    input[type="text"] {
+		width: 79%;
+	    }
+	}
+    }
+}
+
+@media (min-width: 414px) {
+    main {
+	form {
+	    input[type="text"] {
+		width: 81%;
+	    }
+	}
+    }
+}
+
+@media (min-width: 768px) {
+    main {
+	width: 69%;
+	margin: 0 auto;
     }
 }
